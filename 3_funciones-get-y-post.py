@@ -59,3 +59,18 @@ async def usersclass(id: int):#Esta variable tiene que ser la misma que en la l√
         return list(users)[0]
     except:
         return {"error": "No se ha encontrado el usuario"}
+
+#Funci√≥n Post
+@app.post("/usersclass/")
+async def usersclass(user:User):
+    
+    found=False     #Usamos bandera found para verificar si hemos encontrado el usuario 
+    
+    for saved_user in users_list:
+        if saved_user.passangerid == user.passangerid:  #Si el Id del usuario guardado es igual al Id del usuario nuevo
+            return {"error":"el usuario ya existe"}
+    else:
+        users_list.append(user)
+        return user
+    
+    #http://127.0.0.1:8000/usersclass/
